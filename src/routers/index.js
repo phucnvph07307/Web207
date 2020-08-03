@@ -49,6 +49,7 @@ const Routers = ({
               </Route>
               <Route path="/admin/products/" exact>
                 <ProductsManager
+                  categories={categories}
                   products={products}
                   onRemove={onHandleRemove}
                 />
@@ -62,6 +63,7 @@ const Routers = ({
               <Route path="/admin/products/edit/:id">
                 <UpdateProduct
                   products={products}
+                  categories={categories}
                   onUpdateProduct={onHandleUpdateProduct}
                 />
               </Route>

@@ -40,7 +40,6 @@ function App() {
       if (element.id == id) newProducts.splice(index, 1);
     });
     setProducts([...newProducts, value_edit]);
-    console.log(products);
   };
   const onaddCart = (e) => {
     alert(e);
