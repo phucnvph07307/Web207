@@ -25,8 +25,7 @@ const ProductsManager = ({ categories, products, onRemove }) => {
         <h1 className="h3 mb-0 text-gray-800">List Products</h1>
         <Link
           to="/admin/product/create"
-          className="d-none d-sm-inline-block btn btn-sm btn-outline-info shadow-sm"
-        >
+          className="d-none d-sm-inline-block btn btn-sm btn-outline-info shadow-sm">
           New Product
         </Link>
       </div>
@@ -38,7 +37,7 @@ const ProductsManager = ({ categories, products, onRemove }) => {
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Categpry</th>
+                  <th scope="col">Category</th>
                   <th scope="col">Image</th>
                   <th scope="col">Price</th>
                   <th scope="col">Price SALE</th>
@@ -69,20 +68,17 @@ const ProductsManager = ({ categories, products, onRemove }) => {
                         <center>
                           <button
                             className="btn btn-outline"
-                            onClick={() => removeHandle(id)}
-                          >
+                            onClick={() => removeHandle(id)}>
                             <i className="fas fa-trash-alt text-danger"></i>
                           </button>
                           <Link
                             className="btn btn-outline"
-                            to={`/admin/products/edit/${id}`}
-                          >
+                            to={`/admin/products/edit/${id}`}>
                             <i className="far fa-edit text-warning"></i>
                           </Link>
                           <Link
                             className="btn btn-outline"
-                            to={`/admin/products/${id}`}
-                          >
+                            to={`/admin/products/${id}`}>
                             <i className="fas fa-eye text-primary"></i>
                           </Link>
                         </center>

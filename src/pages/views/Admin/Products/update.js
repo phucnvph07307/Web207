@@ -18,6 +18,7 @@ const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
   const [valueInput, setInput] = useState({
     id: id,
   });
+
   const [price, setPrice] = useState(0);
   const [price_sale, setPriceSale] = useState(0);
   const [image, setImage] = useState("");
@@ -111,15 +112,13 @@ const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
                             className="form-control"
                             ref={register({
                               required: true,
-                            })}
-                          >
+                            })}>
                             <option value="">... Choose a category ...</option>
                             {categories.map((elment, index) => (
                               <option
                                 key={index}
                                 value={elment.id}
-                                selected={el.cate_id == elment.id}
-                              >
+                                selected={el.cate_id == elment.id}>
                                 {elment.cate_name}
                               </option>
                             ))}

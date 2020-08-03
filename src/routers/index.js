@@ -17,6 +17,7 @@ import Contact from "../pages/views/Main/Contact";
 import Blog from "../pages/views/Main/Blog";
 import Shop from "../pages/views/Main/Shop";
 import DetailProduct from "../pages/views/Main/DetailProduct";
+import Login from "../pages/views/Admin/Login";
 
 const Routers = ({
   products,
@@ -41,7 +42,11 @@ const Routers = ({
   return (
     <Router>
       <Switch>
-        <Route path="/admin/:path?">
+        <Route path="/admin/login/">
+          <Login />
+        </Route>
+        <Route path="/admin/logout/">logout</Route>
+        <Route path="/admin/:path?/:path?">
           <MainAdmin>
             <Switch>
               <Route path="/admin/" exact>
@@ -54,6 +59,7 @@ const Routers = ({
                   onRemove={onHandleRemove}
                 />
               </Route>
+
               <Route path="/admin/product/create" exact>
                 <CreateProduct
                   categories={categories}
