@@ -16,8 +16,9 @@ import ShowProduct from "../pages/views/Admin/Products/show";
 import Contact from "../pages/views/Main/Contact";
 import Blog from "../pages/views/Main/Blog";
 import Shop from "../pages/views/Main/Shop";
+import ShoppingCart from "../pages/views/Main/ShoppingCart";
 import DetailProduct from "../pages/views/Main/DetailProduct";
-import Login from "../pages/views/Admin/Login";
+import Login from "../components/Auth/Login";
 
 const Routers = ({
   products,
@@ -25,7 +26,14 @@ const Routers = ({
   onRemove,
   onCreateProduct,
   onUpdateProduct,
-  addCart,
+  onAddCart,
+  cart,
+  redution,
+  increase,
+  removeItemCart,
+  total,
+  clearCart,
+  getTotal,
 }) => {
   const onHandleRemove = (id) => {
     onRemove(id);
@@ -36,8 +44,23 @@ const Routers = ({
   const onHandleUpdateProduct = (id, value_edit) => {
     onUpdateProduct(id, value_edit);
   };
-  const onaddCart = (e) => {
-    addCart(e);
+  const onHandleAddCart = (e) => {
+    onAddCart(e);
+  };
+  const onHandleRedution = (id) => {
+    redution(id);
+  };
+  const onHandleIncrease = (id) => {
+    increase(id);
+  };
+  const onHandlRemoveItemCart = (id) => {
+    removeItemCart(id);
+  };
+  const onHandleClearCart = () => {
+    clearCart();
+  };
+  const onHandlegetTotal = () => {
+    getTotal();
   };
   return (
     <Router>
@@ -80,10 +103,10 @@ const Routers = ({
           </MainAdmin>
         </Route>
         <Route>
-          <Main>
+          <Main cart={cart}>
             <Switch>
               <Route path="/" exact>
-                <Home products={products} addCart={onaddCart} />
+                <Home products={products} onAddCart={onHandleAddCart} />
               </Route>
               <Route path="/shop">
                 <Shop products={products} />
@@ -99,6 +122,17 @@ const Routers = ({
               </Route>
               <Route path="/show/:id">
                 <DetailProduct products={products} />
+              </Route>
+              <Route path="/shoping-cart">
+                <ShoppingCart
+                  cart={cart}
+                  redution={onHandleRedution}
+                  increase={onHandleIncrease}
+                  removeItemCart={onHandlRemoveItemCart}
+                  total={total}
+                  clearCart={onHandleClearCart}
+                  getTotal={onHandlegetTotal}
+                />
               </Route>
             </Switch>
           </Main>
