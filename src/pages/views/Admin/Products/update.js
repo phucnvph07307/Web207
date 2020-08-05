@@ -3,18 +3,23 @@ import PropTypes from "prop-types";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import $ from "jquery";
 import { useForm } from "react-hook-form";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
+  const { id } = useParams();
   useEffect(() => {
     window.scrollTo(0, 0);
+    const data = products.find((elment) => elment.id == id);
+    if (data) {
+      setPrice(data.price ? data.price : 0);
+      setPriceSale(data.price_sale ? data.price_sale : 0);
+    }
   }, []);
   const { control, register, errors, handleSubmit } = useForm();
   let history = useHistory();
-  const { id } = useParams();
+
   const [valueInput, setInput] = useState({
     id: id,
   });
@@ -89,7 +94,6 @@ const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="row">
                       <div className="col-6">
-                        {" "}
                         <div className="form-group">
                           <label>Name Product (*):</label>
                           <input
@@ -112,13 +116,15 @@ const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
                             className="form-control"
                             ref={register({
                               required: true,
-                            })}>
+                            })}
+                          >
                             <option value="">... Choose a category ...</option>
                             {categories.map((elment, index) => (
                               <option
                                 key={index}
                                 value={elment.id}
-                                selected={el.cate_id == elment.id}>
+                                selected={el.cate_id == elment.id}
+                              >
                                 {elment.cate_name}
                               </option>
                             ))}
@@ -186,6 +192,22 @@ const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
                     </div>
                     <div className="row">
                       <div className="col-6">
+                        <div className="form-group">
+                          <label>Số lượng (*):</label>
+                          <input
+                            type="number"
+                            name="quantity"
+                            className="form-control"
+                            defaultValue={el.quantity}
+                            ref={register({ required: true, min: 1 })}
+                          />
+                          <span className="text-danger">
+                            {errors.quantity?.type === "required" &&
+                              "* Vui lòng nhập giá số lượng "}
+                            {errors.quantity?.type === "min" &&
+                              "* Vui lòng nhập giá số lượng "}
+                          </span>
+                        </div>
                         <div className="form-group">
                           <label>Url Image (*):</label>
                           <input

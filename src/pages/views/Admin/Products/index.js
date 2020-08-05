@@ -2,6 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from "react-html-parser";
 const ProductsManager = ({ categories, products, onRemove }) => {
   const removeHandle = (id) => {
     Swal.fire({
@@ -25,7 +30,8 @@ const ProductsManager = ({ categories, products, onRemove }) => {
         <h1 className="h3 mb-0 text-gray-800">List Products</h1>
         <Link
           to="/admin/product/create"
-          className="d-none d-sm-inline-block btn btn-sm btn-outline-info shadow-sm">
+          className="d-none d-sm-inline-block btn btn-sm btn-outline-info shadow-sm"
+        >
           New Product
         </Link>
       </div>
@@ -41,6 +47,7 @@ const ProductsManager = ({ categories, products, onRemove }) => {
                   <th scope="col">Image</th>
                   <th scope="col">Price</th>
                   <th scope="col">Price SALE</th>
+                  <th scope="col">Quantity</th>
                   <th scope="col">
                     <center>Action</center>
                   </th>
@@ -48,7 +55,10 @@ const ProductsManager = ({ categories, products, onRemove }) => {
               </thead>
               <tbody>
                 {products.map(
-                  ({ id, name, cate_id, image, price, price_sale }, index) => (
+                  (
+                    { id, name, cate_id, image, price, price_sale, quantity },
+                    index
+                  ) => (
                     <tr key={index}>
                       <th scope="row">{++index}</th>
                       <td>{name}</td>
@@ -62,23 +72,39 @@ const ProductsManager = ({ categories, products, onRemove }) => {
                       <td>
                         <img src={image} alt="" width="50" />
                       </td>
+
                       <td>${price}</td>
                       <td>${price_sale}</td>
+
+                      <td>
+                        {quantity
+                          ? ReactHtmlParser(
+                              '<h6 class="font-weight-bold text-primary">' +
+                                quantity +
+                                "</h6>"
+                            )
+                          : ReactHtmlParser(
+                              '<span class="btn btn-google btn-block">Hết Hàng</span>'
+                            )}
+                      </td>
                       <td>
                         <center>
                           <button
                             className="btn btn-outline"
-                            onClick={() => removeHandle(id)}>
+                            onClick={() => removeHandle(id)}
+                          >
                             <i className="fas fa-trash-alt text-danger"></i>
                           </button>
                           <Link
                             className="btn btn-outline"
-                            to={`/admin/products/edit/${id}`}>
+                            to={`/admin/products/edit/${id}`}
+                          >
                             <i className="far fa-edit text-warning"></i>
                           </Link>
                           <Link
                             className="btn btn-outline"
-                            to={`/admin/products/${id}`}>
+                            to={`/admin/products/${id}`}
+                          >
                             <i className="fas fa-eye text-primary"></i>
                           </Link>
                         </center>
