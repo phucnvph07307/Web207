@@ -17,7 +17,7 @@ import "../../../dist/vendor/perfect-scrollbar/perfect-scrollbar.css";
 
 import "../../../dist/css/main.css";
 import "../../../dist/css/util.css";
-const Header = (props) => {
+const Header = ({ cart }) => {
   return (
     <header>
       {/* Header desktop */}
@@ -76,17 +76,18 @@ const Header = (props) => {
               <div className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                 <i className="zmdi zmdi-search" />
               </div>
-              <div
-                className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                data-notify={2}>
-                <i className="zmdi zmdi-shopping-cart" />
-              </div>
-              <a
-                href="#"
-                className="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-                data-notify={0}>
-                <i className="zmdi zmdi-favorite-outline" />
-              </a>
+              <Link to="/shopping-cart">
+                <div
+                  className={
+                    cart.length
+                      ? "icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                      : "icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart"
+                  }
+                  data-notify={cart.length}
+                >
+                  <i className="zmdi zmdi-shopping-cart" />
+                </div>
+              </Link>
             </div>
           </nav>
         </div>
@@ -106,13 +107,15 @@ const Header = (props) => {
           </div>
           <div
             className="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-            data-notify={2}>
+            data-notify={2}
+          >
             <i className="zmdi zmdi-shopping-cart" />
           </div>
           <a
             href="#"
             className="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
-            data-notify={0}>
+            data-notify={0}
+          >
             <i className="zmdi zmdi-favorite-outline" />
           </a>
         </div>
@@ -173,7 +176,8 @@ const Header = (props) => {
             <a
               href="shoping-cart.html"
               className="label1 rs1"
-              data-label1="hot">
+              data-label1="hot"
+            >
               Features
             </a>
           </li>
