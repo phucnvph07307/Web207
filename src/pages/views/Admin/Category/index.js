@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 const Categories = ({ categories, onRemoveCategory }) => {
   const removeHandle = (id) => {
     Swal.fire({
@@ -48,7 +49,7 @@ const Categories = ({ categories, onRemoveCategory }) => {
                   <tr key={index}>
                     <th>{++index}</th>
                     <td>{cate_name}</td>
-                    <td>{description}</td>
+                    <td>{ReactHtmlParser(description)}</td>
                     <td>
                       <center>
                         <button
