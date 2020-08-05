@@ -76,7 +76,7 @@ const Header = ({ cart }) => {
               <div className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                 <i className="zmdi zmdi-search" />
               </div>
-              <Link to="/shoping-cart">
+              <Link to="/shopping-cart">
                 <div
                   className={
                     cart.length

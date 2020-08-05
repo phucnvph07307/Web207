@@ -19,6 +19,9 @@ import Shop from "../pages/views/Main/Shop";
 import ShoppingCart from "../pages/views/Main/ShoppingCart";
 import DetailProduct from "../pages/views/Main/DetailProduct";
 import Login from "../components/Auth/Login";
+import Checkout from "../pages/views/Main/Checkout";
+import Categories from "../pages/views/Admin/Category";
+import CreateCategory from "../pages/views/Admin/Category/create";
 
 const Routers = ({
   products,
@@ -34,6 +37,8 @@ const Routers = ({
   total,
   clearCart,
   getTotal,
+  onRemoveCategory,
+  onCreateCategory,
 }) => {
   const onHandleRemove = (id) => {
     onRemove(id);
@@ -62,6 +67,13 @@ const Routers = ({
   const onHandlegetTotal = () => {
     getTotal();
   };
+
+  const onHandleRemoveCategory = (id) => {
+    onRemoveCategory(id);
+  };
+  const onHandleCreateCategory = (params) => {
+    onCreateCategory(params);
+  };
   return (
     <Router>
       <Switch>
@@ -74,6 +86,15 @@ const Routers = ({
             <Switch>
               <Route path="/admin/" exact>
                 <Dashboard />
+              </Route>
+              <Route path="/admin/category" exact>
+                <Categories
+                  categories={categories}
+                  onRemoveCategory={onHandleRemoveCategory}
+                />
+              </Route>
+              <Route path="/admin/category/create" exact>
+                <CreateCategory onCreateCategory={onHandleCreateCategory} />
               </Route>
               <Route path="/admin/products/" exact>
                 <ProductsManager
@@ -123,7 +144,7 @@ const Routers = ({
               <Route path="/show/:id">
                 <DetailProduct products={products} />
               </Route>
-              <Route path="/shoping-cart">
+              <Route path="/shopping-cart">
                 <ShoppingCart
                   cart={cart}
                   redution={onHandleRedution}
@@ -133,6 +154,9 @@ const Routers = ({
                   clearCart={onHandleClearCart}
                   getTotal={onHandlegetTotal}
                 />
+              </Route>
+              <Route path="/check-out">
+                <Checkout cart={cart} clearCart={onHandleClearCart} />
               </Route>
             </Switch>
           </Main>

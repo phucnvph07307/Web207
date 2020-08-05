@@ -5,11 +5,13 @@ const Sidebar = (props) => {
   return (
     <ul
       className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-      id="accordionSidebar">
+      id="accordionSidebar"
+    >
       {/* Sidebar - Brand */}
       <a
         className="sidebar-brand d-flex align-items-center justify-content-center"
-        href="index.html">
+        href="index.html"
+      >
         <div className="sidebar-brand-text mx-3">Admin</div>
       </a>
       {/* Divider */}
@@ -33,9 +35,23 @@ const Sidebar = (props) => {
           data-toggle="collapse"
           data-target="#collapseTwo"
           aria-expanded="true"
-          aria-controls="collapseTwo">
+          aria-controls="collapseTwo"
+        >
           <i className="fas fa-fw fa-cog" />
           <span>Products</span>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link
+          className="nav-link collapsed"
+          to="/admin/category"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="true"
+          aria-controls="collapseTwo"
+        >
+          <i className="fas fa-fw fa-cog" />
+          <span>Category</span>
         </Link>
       </li>
       <hr className="sidebar-divider d-none d-md-block" />
@@ -46,7 +62,8 @@ const Sidebar = (props) => {
           data-toggle="collapse"
           data-target="#collapseTwo"
           aria-expanded="true"
-          aria-controls="collapseTwo">
+          aria-controls="collapseTwo"
+        >
           <i className="fas fa-fw fa-cog" />
           <span>Orders</span>
         </Link>
