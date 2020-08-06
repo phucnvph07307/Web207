@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 function App() {
   let history = useHistory();
   const [products, setProducts] = useState([]);
+  const [products_client, setProductsClient] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
@@ -15,6 +16,10 @@ function App() {
   useEffect(() => {
     getAllProducts();
     getAllCategories();
+    getAllProductsClient();
+  }, []);
+
+  useEffect(() => {
     let shoppingCartItems = [];
     if (localStorage["shopping-cart-items"] != null) {
       shoppingCartItems = JSON.parse(
@@ -24,6 +29,7 @@ function App() {
     setCart(shoppingCartItems);
     getTotal(shoppingCartItems);
   }, []);
+
   const getAllCategories = async () => {
     try {
       const { data } = await Category_API.getAll();
@@ -40,7 +46,14 @@ function App() {
       console.log("failed to request API PRODUCT: ", error);
     }
   };
-
+  const getAllProductsClient = async () => {
+    try {
+      const { data } = await Product_API.getAllProductsClient();
+      setProductsClient(data);
+    } catch (error) {
+      console.log("failed to request API PRODUCT: ", error);
+    }
+  };
   const getTotal = (array = []) => {
     const res = array.reduce((prev, item) => {
       return prev + item.price * item.quantity;
@@ -165,6 +178,7 @@ function App() {
     <div className="App">
       <Routers
         products={products}
+        products_client={products_client}
         categories={categories}
         onRemove={onHandleRemove}
         onCreateProduct={onHandleCreateProduct}

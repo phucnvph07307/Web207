@@ -154,19 +154,15 @@ const ShoppingCart = ({
                               <div className="wrap-num-product flex-w m-l-auto m-r-0">
                                 <div
                                   className="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m "
-                                  onClick={() => onHandleRedution(id)}
-                                >
+                                  onClick={() => onHandleRedution(id)}>
                                   <i className="fs-16 zmdi zmdi-minus text-danger" />
                                 </div>
-                                <input
-                                  className="mtext-104 cl3 txt-center num-product"
-                                  type="number"
-                                  value={quantity}
-                                />
+                                <div className="pt-2 txt-center num-product">
+                                  {quantity}
+                                </div>
                                 <div
                                   className="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
-                                  onClick={() => onHandleIncrease(id)}
-                                >
+                                  onClick={() => onHandleIncrease(id)}>
                                   <i className="fs-16 zmdi zmdi-plus text-primary" />
                                 </div>
                               </div>
@@ -186,14 +182,12 @@ const ShoppingCart = ({
                 <div className="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                   <div
                     className="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10 bg-danger"
-                    onClick={() => onHandleClearCart()}
-                  >
+                    onClick={() => onHandleClearCart()}>
                     Clear Cart
                   </div>
                   <Link
                     to="/check-out"
-                    className="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10 bg-warning"
-                  >
+                    className="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10 bg-warning">
                     Check Out
                   </Link>
                 </div>

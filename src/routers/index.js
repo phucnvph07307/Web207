@@ -25,6 +25,7 @@ import CreateCategory from "../pages/views/Admin/Category/create";
 
 const Routers = ({
   products,
+  products_client,
   categories,
   onRemove,
   onCreateProduct,
@@ -127,10 +128,10 @@ const Routers = ({
           <Main cart={cart}>
             <Switch>
               <Route path="/" exact>
-                <Home products={products} onAddCart={onHandleAddCart} />
+                <Home products={products_client} onAddCart={onHandleAddCart} />
               </Route>
               <Route path="/shop">
-                <Shop products={products} />
+                <Shop products={products_client} />
               </Route>
               <Route path="/blog">
                 <Blog />
@@ -142,7 +143,7 @@ const Routers = ({
                 <Contact />
               </Route>
               <Route path="/show/:id">
-                <DetailProduct products={products} />
+                <DetailProduct products={products_client} />
               </Route>
               <Route path="/shopping-cart">
                 <ShoppingCart

@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import Select from "react-select";
 
 const CreateProduct = ({ categories, onCreateProduct }) => {
   useEffect(() => {}, []);
@@ -109,9 +108,9 @@ const CreateProduct = ({ categories, onCreateProduct }) => {
                     className="form-control"
                     ref={register({
                       required: true,
-                    })}
-                  >
+                    })}>
                     <option value="">... Choose a category ...</option>
+
                     {categories.map((elment, index) => (
                       <option key={index} value={elment.id}>
                         {elment.cate_name}
@@ -123,20 +122,10 @@ const CreateProduct = ({ categories, onCreateProduct }) => {
                       "* Vui lòng Danh mục"}
                   </span>
                 </div>
-                <div className="form-group">
-                  {/* <Select
-                    name="cate_id"
-                    options={categories.map(({ id, cate_name }, index) => ({
-                      value: id,
-                      label: cate_name,
-                    }))}
-                  /> */}
-                </div>
               </div>
             </div>
             <div className="row">
               <div className="col-6">
-                {" "}
                 <div className="form-group">
                   <label>Price (*):</label>
                   <input

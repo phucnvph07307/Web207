@@ -6,20 +6,28 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
+import Product_API from "../../../../api/productApi";
 const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
   const { id } = useParams();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const data = products.find((elment) => elment.id == id);
-    if (data) {
-      setPrice(data.price ? data.price : 0);
-      setPriceSale(data.price_sale ? data.price_sale : 0);
-    }
-  }, []);
   const { control, register, errors, handleSubmit } = useForm();
   let history = useHistory();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getAllProducts();
+  }, []);
 
+  const getAllProducts = async () => {
+    try {
+      const { data } = await Product_API.getAll();
+      const result = data.find((elment) => elment.id == id);
+      if (result) {
+        setPrice(result.price ? result.price : 0);
+        setPriceSale(result.price_sale ? result.price_sale : 0);
+      }
+    } catch (error) {
+      console.log("failed to request API PRODUCT: ", error);
+    }
+  };
   const [valueInput, setInput] = useState({
     id: id,
   });
@@ -116,15 +124,13 @@ const UpdateProduct = ({ products, categories, onUpdateProduct }) => {
                             className="form-control"
                             ref={register({
                               required: true,
-                            })}
-                          >
+                            })}>
                             <option value="">... Choose a category ...</option>
                             {categories.map((elment, index) => (
                               <option
                                 key={index}
                                 value={elment.id}
-                                selected={el.cate_id == elment.id}
-                              >
+                                selected={el.cate_id == elment.id}>
                                 {elment.cate_name}
                               </option>
                             ))}
