@@ -3,6 +3,9 @@ import api from "./axiosHttp";
 const getAll = () => {
   return api.get("/product");
 };
+const getAllProductsClient = () => {
+  return api.get("/get_all_products_client");
+};
 
 const get = (id) => {
   return api.get(`/product/${id}`);
@@ -23,6 +26,7 @@ const remove = (id) => {
 
 export default {
   getAll,
+  getAllProductsClient,
   get,
   create,
   update,

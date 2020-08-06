@@ -108,9 +108,9 @@ const CreateProduct = ({ categories, onCreateProduct }) => {
                     className="form-control"
                     ref={register({
                       required: true,
-                    })}
-                  >
+                    })}>
                     <option value="">... Choose a category ...</option>
+
                     {categories.map((elment, index) => (
                       <option key={index} value={elment.id}>
                         {elment.cate_name}
@@ -126,7 +126,6 @@ const CreateProduct = ({ categories, onCreateProduct }) => {
             </div>
             <div className="row">
               <div className="col-6">
-                {" "}
                 <div className="form-group">
                   <label>Price (*):</label>
                   <input
@@ -179,7 +178,21 @@ const CreateProduct = ({ categories, onCreateProduct }) => {
             </div>
             <div className="row">
               <div className="col-6">
-                {" "}
+                <div className="form-group">
+                  <label>Số lượng (*):</label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    className="form-control"
+                    ref={register({ required: true, min: 1 })}
+                  />
+                  <span className="text-danger">
+                    {errors.quantity?.type === "required" &&
+                      "* Vui lòng nhập giá số lượng "}
+                    {errors.quantity?.type === "min" &&
+                      "* Vui lòng nhập giá số lượng "}
+                  </span>
+                </div>
                 <div className="form-group">
                   <label>Url Image (*):</label>
                   <input
